@@ -36,8 +36,18 @@ I had achieved a certain sharpening of the result with an additional clause in t
 
 So that you don't have to intervene in the code of the Webtrees core, these options are now separated out as a separate function, so they are no longer necessarily overwritten by a Webtrees update. You activate it via "Settings" in the administration-all modules-overview. If they are inactive, the original Webtrees function continues to run, if one or both are active, the query is executed accordingly.
 
-##### A notice:
-##### If the extension module ['huhwt-cce'](https://github.com/huhwt/huhwt-cce) is also installed, you can add the displayed people to the ClippingsCart.
+Interactive tree
+----------------
+
+A separate view is generated for each person identified as a potential duplicate, similar to the Webtrees core function ‘Interactive tree’ – i.e., the person in question with their partner(s) in the middle and up to 4 generations of descendants on the left and ancestors on the right. The view is limited compared to the core function; for example, it does not automatically expand when clicked.
+
+The persons and their partners are displayed in a box with their name (supplemented by their ID) and lifespan. Clicking on this box adds specific information about birth and death, and occasionally marriage and divorce. In the expanded box, there is now an icon next to the name. Clicking on this icon opens a new, original Interactive tree diagram for the respective person in a new browser tab.
+
+Another click in the expanded box resets it to its initial state.
+
+##### Notes:
+##### If the extension module [‘huhwt-xtv’](https://github.com/huhwt/huhwt-xtv) is installed/activated, the ‘ℍ Interactive tree XT’ is executed instead of the Webtrees module ‘Interactive tree’.
+##### If the extension module ['huhwt-cce'](https://github.com/huhwt/huhwt-cce) is installed/activated, you can add the displayed people to the Clippings cart 'ℍ Clippings cart enhanced'.
 
 
 Installation and upgrading

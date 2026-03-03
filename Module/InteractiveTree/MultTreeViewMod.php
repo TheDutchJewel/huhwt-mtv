@@ -31,6 +31,7 @@ use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Tree;
 use Illuminate\Support\Collection;
 
+use Fisharebest\Webtrees\Services\ModuleService;
 
 /**
  * Class MultTreeViewMod
@@ -44,6 +45,8 @@ class MultTreeViewMod
 
     private $CCEok;
 
+    private $XTVok;
+
     /**
      * Treeview Constructor
      *
@@ -53,7 +56,9 @@ class MultTreeViewMod
     {
         $this->name = $name;
 
-        $this->CCEok = class_exists("HuHwt\WebtreesMods\ClippingsCartEnhanced\ClippingsCartEnhancedModule", true);
+        $this->CCEok = $this->test_CCE_();
+
+        $this->XTVok = $this->test_XTV_();
     }
 
     /**
@@ -160,23 +165,31 @@ class MultTreeViewMod
      *
      * @return string
      */
-    private function getPersonDetails(Individual $individual, Family $family = null): string
+    private function getPersonDetails(Individual $individual, ?Family $family = null): string
     {
+        $tree_module = $this->XTVok ? '_huhwt-xtv_' : 'tree';
+
         $chart_url = route('module', [
-            'module' => 'tree',
+            'module' => $tree_module,
             'action' => 'Chart',
             'xref'   => $individual->xref(),
-            'tree'   => $individual->tree()->name(),
+            'tree'   => $individual->tree()->name()
         ]);
 
         $hmtl = $this->drawThumbnail($individual);
-        $hmtl .= '<a class="tv_link" href="' . e($individual->url()) . '">' . $individual->fullName() . '</a> <a href="' . e($chart_url) . '" title="' . I18N::translate('Interactive tree of %s', strip_tags($individual->fullName())) . '" class="wt-icon-individual tv_link tv_treelink"></a>';
+        $icon_indi  = ($individual->sex() == 'F' ? 'huhwt-iconF' : 'huhwt-iconM');
+        $hmtl .= '<a class="tv_link" href="' . e($individual->url()) . '">' . $individual->fullName() . '</a> <a href="' . e($chart_url) . '" target="_blank" title="' . I18N::translate('Interactive tree of %s', strip_tags($individual->fullName())) . '" class="' . $icon_indi . ' tv_link tv_treelink"></a>';
         foreach ($individual->facts(Gedcom::BIRTH_EVENTS, true) as $fact) {
             $hmtl .= $fact->summary();
         }
         if ($family) {
             foreach ($family->facts(Gedcom::MARRIAGE_EVENTS, true) as $fact) {
                 $hmtl .= $fact->summary();
+            }
+        }
+        if ($family) {
+            foreach ($family->facts(Gedcom::DIVORCE_EVENTS, true) as $fact) {
+                $html       .= $fact->summary();
             }
         }
         foreach ($individual->facts(Gedcom::DEATH_EVENTS, true) as $fact) {
@@ -254,7 +267,7 @@ class MultTreeViewMod
      *
      * @return string
      */
-    private function drawPerson(Individual $person, string $earmark, int $gen, int $state, Family $pfamily = null, string $line = '', $isRoot = false): string
+    private function drawPerson(Individual $person, string $earmark, int $gen, int $state, ?Family $pfamily = null, string $line = '', $isRoot = false): string
     {
         if ($gen < 0) {
             return '';
@@ -432,4 +445,27 @@ class MultTreeViewMod
     {
         return '<td class="tv_hline"><div class="tv_hline"></div></td>';
     }
+
+    private function test_XTV_ () : bool
+    {
+        $retval = false;
+        $module_service = new ModuleService();
+        $extended_treeview = $module_service->findByName('_huhwt-xtv_');
+        if ($extended_treeview !== null ) {
+            $retval = true;
+        }
+        return $retval;
+    }
+
+    private function test_CCE_ () : bool
+    {
+        $retval = false;
+        $module_service = new ModuleService();
+        $CCE_activ = $module_service->findByName('_huhwt-cce_');
+        if ($CCE_activ !== null ) {
+            $retval = true;
+        }
+        return $retval;
+    }
+
 }

@@ -59,6 +59,9 @@ msgstr "nur"
 msgid "Match only in"
 msgstr "Übereinstimmung nur in"
 
+msgid "Matched only by"
+msgstr "Übereinstimmung nur gemäß"
+
 msgid "(omitted)"
 msgstr "(entfällt)"
 

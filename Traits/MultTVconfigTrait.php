@@ -47,7 +47,10 @@ trait MultTVconfigTrait {
             0   => I18N::translate('(default)'),        // es wird die Default-Aktion ausgeführt
             // EW.H - MOD ...     Achtung, Text wird ab '>' so wie geschrieben übernommen!
             1   => I18N::translate('Match only in') . " ->'BIRT', 'CHR', 'DEAT', 'BURI'",
-            2   => I18N::translate('Match only in') . " ->'BIRT', 'CHR', 'DEAT'"
+            2   => I18N::translate('Match only in') . " ->'BIRT', 'CHR', 'DEAT'",
+            3   => I18N::translate('Match only in') . " ->'BIRT', 'CHR'",
+            4   => I18N::translate('Match only in') . " ->'BIRT'",
+            5   => I18N::translate('none') . ' - ' . I18N::translate('Matched only by') . " 'NAME'",
         ];
     }
 

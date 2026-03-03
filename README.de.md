@@ -36,8 +36,20 @@ Ein gewisse Schärfung des Ergebnisses hatte ich durch eine zusätzliche Klausel
 
 Damit man nicht in den Code des Webtrees-Kern eingreifen muss, sind diese Optionen jetzt als eigene Funktion ausgegliedert, werden also nicht mehr zwangsläufig durch ein Webtrees-Update überschrieben. Man aktiviert sie über "Einstellungen" in der Verwaltung-Alle Module-Übersicht. Sind sie inaktiv, läuft weiterhin die originale Webtrees-Funktion, ist eine oder beide aktiv, wird die Abfrage entsprechend angepasst ausgeführt.
 
-##### Hinweis:
-##### Falls das Erweiterungs-Modul ['huhwt-cce'](https://github.com/huhwt/huhwt-cce) ebenfalls installiert ist, kann man die angezeigten Personen in den Sammelkorb übernehmen.
+In den Einstellungen lassen sich die für den Abgleich relevanten Datums-Referenzen gezielt festlegen, bis hin zum kompletten Unterbleiben, dann wird nur auf übereinstimmende Namen geprüft. Damit lassen sich auch Situationen ermitteln, in denen Personen tatsächlich mehrfach im Stammbaum vorhanden sind, es bei den Daten aber unterschiedliche Werte gibt - Beispiel: Eine Person wurde mehrfach aus unterschiedlichen Quellen übernommen - Eintrag A Geburts- und Taufdatum unterschiedlich, Eintrag B (fälschlicherweise) Geburts- und Taufdatum mit gleichem Wert belegt, alle anderen Angaben gleich ... es handelt sich tatsächlich um die gleiche Person. Der Abgleich über Name und Daten erkennt diese Situation nicht.
+
+Interaktives Sanduhr-Diagramm
+-----------------------------
+
+Für jede der als potentielle Duplikate eingeschätzte Personen wird eine eigene Ansicht erzeugt, analog der Webtrees-Kernfunktion 'Interaktives Sanduhr-Diagramm' - also die jeweilige Person mit Partner(n) in der Mitte und je bis zu 4 Generationen an Nachfahren nach links und Vorfahren nach rechts angeordnet. Die Ansicht ist gegenüber der Kernfunktion eingeschränkt, so wird sie zum Beispiel bei Klick in die Ansicht nicht automatisch erweitert.
+
+Die Personen mit ihren Partnern werden in einer Box angezeigt mit ihrem Namen (ergänzt um die Kennung) und Lebensspanne. Ein Klick in diese Box ergänzt die Informationen um die konkreten Einträge zu Geburt und Tod, fallweise ergänzt um Ehe und Scheidung. In der erweiterten Box steht neben dem Namen nun auch ein Icon. Ein Klick auf dieses Icon öffnet ein neues eigenes origäres Interaktives Sanduhr-Diagramm für die jeweilige Person in einem neuen Browser-Tab.
+
+Ein weiterer Klick in die erweiterte Box setzt sie wieder auf den Ausgangzustand zurück.
+
+##### Hinweise:
+##### Falls das Erweiterungs-Modul ['huhwt-xtv'](https://github.com/huhwt/huhwt-xtv) installiert/aktiviert ist, wird anstelle des Webtrees-Moduls 'Interaktives Sanduhr-Diagramm' das 'ℍ Interaktives Sanduhr-Diagramm XT' aufgerufen.
+##### Falls das Erweiterungs-Modul ['huhwt-cce'](https://github.com/huhwt/huhwt-cce) installiert/aktiviert ist, kann man die angezeigten Personen in den Sammelbehälter 'ℍ Sammelbehälter' übernehmen.
 
 Installation und Upgrading
 --------------------------
